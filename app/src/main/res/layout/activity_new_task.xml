@@ -54,7 +54,8 @@
                 android:src="@drawable/ic_date"
                 android:background="@android:color/transparent"
                 android:layout_gravity="center_vertical"
-                android:padding="@dimen/dp_4"/>
+                android:padding="@dimen/dp_4"
+                android:onClick="showDatePickerDialog"/>
 
         </LinearLayout>
 
@@ -83,7 +84,8 @@
                 android:src="@drawable/ic_access_time"
                 android:background="@android:color/transparent"
                 android:layout_gravity="center_vertical"
-                android:padding="@dimen/dp_4"/>
+                android:padding="@dimen/dp_4"
+                android:onClick="showTimePickerDialog"/>
 
         </LinearLayout>
 
