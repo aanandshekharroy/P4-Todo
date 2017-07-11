@@ -1,6 +1,8 @@
 package com.c3cyberclub.p5_todoapp;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CursorAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+        DatabaseHandler handler = new DatabaseHandler(this);
+// Get access to the underlying writeable database
+        SQLiteDatabase db = handler.getWritableDatabase();
+// Query for items from the database and get a cursor back
+        Cursor todoCursor = db.query(DatabaseHandler.TABLE_TODOS,null,null,null,null,null,null);
+        ListView todo_list=(ListView)findViewById(R.id.list_view);
+        todo_list.setAdapter(new TodoAdapter(this,todoCursor));
     }
 
     private void addNewTask() {
