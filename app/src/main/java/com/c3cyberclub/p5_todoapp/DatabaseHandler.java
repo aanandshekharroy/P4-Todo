@@ -20,7 +20,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public static final String TABLE_TODOS = "Todos";
 
     // Contacts Table Columns names
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "_id";
     public static final String KEY_NAME = "name";
     public static final String KEY_DEADLINE = "deadline";
     public static final String KEY_CREATED_AT="created_at";
