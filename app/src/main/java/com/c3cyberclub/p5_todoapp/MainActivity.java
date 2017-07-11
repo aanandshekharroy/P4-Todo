@@ -16,6 +16,10 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private DatabaseHandler handler;
+    private ListView todo_list;
+    private SQLiteDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +37,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        DatabaseHandler handler = new DatabaseHandler(this);
+         handler = new DatabaseHandler(this);
 // Get access to the underlying writeable database
-        SQLiteDatabase db = handler.getWritableDatabase();
-// Query for items from the database and get a cursor back
-        Cursor todoCursor = db.query(DatabaseHandler.TABLE_TODOS,null,null,null,null,null,null);
-        ListView todo_list=(ListView)findViewById(R.id.list_view);
-        todo_list.setAdapter(new TodoAdapter(this,todoCursor));
+         db = handler.getWritableDatabase();
     }
 
     private void addNewTask() {
@@ -52,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+// Query for items from the database and get a cursor back
+        Cursor todoCursor = db.query(DatabaseHandler.TABLE_TODOS,null,null,null,null,null,null);
+        todo_list=(ListView)findViewById(R.id.list_view);
+        todo_list.setAdapter(new TodoAdapter(this,todoCursor));
     }
 
     @Override

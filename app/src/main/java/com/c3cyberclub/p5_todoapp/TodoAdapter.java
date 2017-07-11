@@ -19,13 +19,16 @@ public class TodoAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.todo_list_item,parent,false);
+        return LayoutInflater.from(context).inflate(R.layout.item_todo,parent,false);
 
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView title=(TextView)view.findViewById(R.id.title);
+        TextView title=(TextView)view.findViewById(R.id.textTitle);
         title.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHandler.KEY_NAME)));
+
+        TextView duedate=(TextView)view.findViewById(R.id.textDueDate);
+        duedate.setText(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseHandler.KEY_DEADLINE)));
     }
 }
