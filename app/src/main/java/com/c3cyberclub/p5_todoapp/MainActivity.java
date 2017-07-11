@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addNewTask() {
-        Intent add_new_todo=new Intent(this, NewTask.class);
+        Intent add_new_todo = new Intent(this, NewTask.class);
         startActivity(add_new_todo);
     }
 

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">P5-TodoApp</string>
     <string name="action_settings">Settings</string>
+    <string name="title">What is to be done?</string>
+    <string name="description">Description</string>
+    <string name="choose_deadline">Choose Deadline</string>
+    <string name="date">Due Date</string>
+    <string name="time">Time</string>
+    <string name="save_todo">Save Todo</string>
 </resources>
