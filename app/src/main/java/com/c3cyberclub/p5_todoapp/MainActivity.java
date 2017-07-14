@@ -1,9 +1,11 @@
 package com.c3cyberclub.p5_todoapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -59,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
 // Query for items from the database and get a cursor back
-        Cursor todoCursor = db.query(DatabaseHandler.TABLE_TODOS,null,null,null,null,null,null);
+        SharedPreferences sp= PreferenceManager.getDefaultSharedPreferences(this);
+//        Sorting the data based on the value saved in the settings
+        String sort_by=sp.getString("sort_by",DatabaseHandler.KEY_CREATED_AT);
+
+        Cursor todoCursor = db.query(DatabaseHandler.TABLE_TODOS,null,null,null,null,null,sort_by+" ASC ");
         todo_list=(ListView)findViewById(R.id.list_view);
         todo_list.setAdapter(new TodoAdapter(this,todoCursor));
     }
@@ -71,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+//          Starting the settings activity when settings menu is clicked
+            startActivity(new Intent(this,SettingsActivity.class));
             return true;
         }
 
