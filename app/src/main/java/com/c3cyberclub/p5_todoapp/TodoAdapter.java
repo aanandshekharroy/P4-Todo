@@ -2,10 +2,13 @@ package com.c3cyberclub.p5_todoapp;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -13,8 +16,15 @@ import android.widget.TextView;
  */
 
 public class TodoAdapter extends CursorAdapter {
+    private DatabaseHandler handler;
+    private SQLiteDatabase db;
+    private Context mContext;
     public TodoAdapter(Context context, Cursor c) {
         super(context, c);
+        mContext=context;
+//        Getting access to the database to delete the item
+        handler = new DatabaseHandler(mContext);
+        db = handler.getWritableDatabase();
     }
 
     @Override
