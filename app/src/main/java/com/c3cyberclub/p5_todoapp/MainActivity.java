@@ -82,7 +82,19 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this,SettingsActivity.class));
             return true;
         }
+        if(id==R.id.menu_item_share){
+            shareText();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void shareText() {
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String shareBodyText = "i use the best todo app that I made. Wanna try?";
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject/Title");
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+        startActivity(Intent.createChooser(intent, "Choose sharing method"));
     }
 }
