@@ -80,6 +80,11 @@ public class NewTask extends AppCompatActivity implements DatePickerDialogFragme
         JobScheduler scheduler = (JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         int result = scheduler.schedule(jobInfo);
         Log.d("Scheduled:"," "+result);
+        if (result==JobScheduler.RESULT_SUCCESS){
+            finish();
+        }else {
+            Toast.makeText(this, "Unable to schedule notification",Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setNotification(){
@@ -109,12 +114,6 @@ public class NewTask extends AppCompatActivity implements DatePickerDialogFragme
         SQLiteDatabase db = new DatabaseHandler(this).getWritableDatabase();
         db.insert(DatabaseHandler.TABLE_TODOS,null, cv);
 
-
-        Calendar calendar = Calendar.getInstance();
-//        calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
-//                timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
-        long startTime = calendar.getTimeInMillis();
-//        finish();
     }
 
     public void showDatePickerDialog(View v) {
